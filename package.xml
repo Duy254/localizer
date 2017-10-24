@@ -51,10 +51,6 @@
   <buildtool_depend>catkin</buildtool_depend>
   <depend>roscpp</depend>
   <depend>geometry_msgs</depend>
-  <build_depend>arduino_msg</build_depend>
-  <build_export_depend>arduino_msg</build_export_depend>
-  <exec_depend>arduino_msg</exec_depend>
-
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

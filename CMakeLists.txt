@@ -9,7 +9,6 @@ add_compile_options(-std=c++11)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
-  arduino_msg
   roscpp
 )
 
@@ -105,7 +104,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
     INCLUDE_DIRS include
 #  LIBRARIES localizer
-    CATKIN_DEPENDS arduino_msg roscpp geometry_msgs
+    CATKIN_DEPENDS roscpp geometry_msgs
 #  DEPENDS system_lib
 )
 
@@ -134,7 +133,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(${PROJECT_NAME}_node src/localizer_node.cpp src/Pose.cpp)
+add_executable(${PROJECT_NAME}_node src/localizer_node.cpp src/Fusion.cpp include/Fusion.h)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the

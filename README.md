@@ -6,13 +6,13 @@ This node acts as the main package for all the localization stuff of Cabot.
 
 The main file, `src/localizer_node.cpp` is designed to contain as least code as possible, so that the reader can see clearly what is going on.
 
-The class `Pose` contains all the heavy lifting including `subscribe` and `publish`
+The class `Fusion` contains all the heavy lifting including `subscribe` and `publish`
 
 Currently this only get information from encoder.
 
 ## What's subscribed and published
 
 - Subscribed
-    - `/encoder`: contains speed information
+    - `/NavCog/pose`: The location info from NavCog
 - Published
-    - `/pose`: a `geometry_msgs/Pose2D` message
+    - `/pose`: a `geometry_msgs/Pose2D` message, containing fused pose info
