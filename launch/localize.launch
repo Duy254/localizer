@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<launch>
+
+  <node pkg="localizer" type="localizer_node" name="localizer_node" />
+
+  <include file="$(find arduino_node)/launch/ros_serial.launch"/>
+
+</launch>
