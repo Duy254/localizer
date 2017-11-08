@@ -8,7 +8,7 @@ The main file, `src/localizer_node.cpp` is designed to contain as least code as 
 
 The class `Fusion` contains all the heavy lifting including `subscribe` and `publish`
 
-Currently this only get information from encoder.
+Currently this only get information from Navcog.
 
 ## What's subscribed and published
 
