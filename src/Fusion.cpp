@@ -1,23 +1,30 @@
 #include "Fusion.h"
 
 Fusion::Fusion(ros::NodeHandle n) {
-    this->puber = n.advertise<geometry_msgs::Pose2D>("pose", 1000);
+    this->publisher = n.advertise<navcog_msg::SimplifiedOdometry>("odometry", 1000);
 }
 
-Pose Fusion::getLocation() {
-    return this->pos;
+Odom Fusion::getLocation() {
+    return this->odom;
 }
 
-void Fusion::NavCogCallback(const geometry_msgs::Pose2D::ConstPtr& msg) {
+void Fusion::NavCogCallback(const navcog_msg::SimplifiedOdometry::ConstPtr& msg) {
     // In the future there will be more fancy sensor fusion code
-    this->pos.x = msg->x;
-    this->pos.y = msg->y;
+    this->odom.x = msg->pose.x;
+    this->odom.y = msg->pose.y;
+    this->odom.v = msg->speed;
 }
+
+void Fusion::IMUCallback(const geometry_msgs::Vector3Stamped::ConstPtr& msg){
+    this->odom.theta = msg->vector.x;
+}
+
 
 void Fusion::publish() {
-    geometry_msgs::Pose2D msg;
-    msg.x = this->pos.x;
-    msg.y = this->pos.y;
-    msg.theta = 0;
-    this->puber.publish(msg);
+    navcog_msg::SimplifiedOdometry msg;
+    msg.pose.x = this->odom.x;
+    msg.pose.y = this->odom.y;
+    msg.orientation = this->odom.theta;
+    msg.speed = this->odom.v;
+    this->publisher.publish(msg);
 }

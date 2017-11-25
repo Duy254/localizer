@@ -2,20 +2,28 @@
 #define LOCALIZER_LOCATION_H
 
 #include "ros/ros.h"
-#include "geometry_msgs/Pose2D.h"
+#include <tf/transform_broadcaster.h>
+#include <navcog_msg/SimplifiedOdometry.h>
+#include <arduino_msg/Motor.h>
+#include <geometry_msgs/Vector3Stamped.h>
 
-struct Pose {
+struct Odom {
     double x;
     double y;
+    double z;
+    double theta;
+    double v;
+    double w; //Actually omega
 };
 
 class Fusion{
-    Pose pos;
-    ros::Publisher puber;
+    Odom odom;
+    ros::Publisher publisher;
 public:
-    Fusion(ros::NodeHandle n);
-    Pose getLocation();
-    void NavCogCallback(const geometry_msgs::Pose2D::ConstPtr& msg);
+    explicit Fusion(ros::NodeHandle n);
+    Odom getLocation();
+    void NavCogCallback(const navcog_msg::SimplifiedOdometry::ConstPtr& msg);
+    void IMUCallback(const geometry_msgs::Vector3Stamped::ConstPtr& msg);
     void publish();
 };
 

@@ -15,4 +15,4 @@ Currently this only get information from encoder.
 - Subscribed
     - `/NavCog/pose`: The location info from NavCog
 - Published
-    - `/pose`: a `geometry_msgs/Pose2D` message, containing fused pose info
+    - `/odometry`: a `nav_msgs/Odometry` message, containing fused pose info
