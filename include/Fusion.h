@@ -19,7 +19,7 @@ struct Odom {
 class Fusion{
     Odom odom;
     ros::Publisher publisher;
-    bool allUpdated;
+    bool allUpdated = false;
     bool isUpdated[2] = {false, false};    
 public:
     explicit Fusion(ros::NodeHandle n);

@@ -9,7 +9,7 @@ int main(int argc, char **argv) {
     ros::NodeHandle n;
 
     Fusion pose(n);
-    ros::Subscriber navcog_sub = n.subscribe("NavCog/odometry", 1000, &Fusion::NavCogCallback, &pose);
+    ros::Subscriber navcog_sub = n.subscribe("Navcog/odometry", 1000, &Fusion::NavCogCallback, &pose);
     ros::Subscriber imu_sub = n.subscribe("imu", 1000, &Fusion::IMUCallback, &pose);
 
     ros::Rate loop_rate(LOOP_RATE);
