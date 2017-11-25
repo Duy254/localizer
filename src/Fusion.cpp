@@ -13,12 +13,13 @@ void Fusion::NavCogCallback(const navcog_msg::SimplifiedOdometry::ConstPtr& msg)
     this->odom.x = msg->pose.x;
     this->odom.y = msg->pose.y;
     this->odom.v = msg->speed;
+    this->isUpdated[0] = true;
 }
 
 void Fusion::IMUCallback(const geometry_msgs::Vector3Stamped::ConstPtr& msg){
     this->odom.theta = msg->vector.x;
+    this->isUpdated[1] = true;
 }
-
 
 void Fusion::publish() {
     navcog_msg::SimplifiedOdometry msg;
@@ -27,4 +28,14 @@ void Fusion::publish() {
     msg.orientation = this->odom.theta;
     msg.speed = this->odom.v;
     this->publisher.publish(msg);
+}
+
+bool Fusion::isAllUpdated() {
+    if (!allUpdated){
+        allUpdated = true;
+        for (auto&& u : isUpdated){
+            allUpdated &= u;
+        }
+    }
+    return allUpdated;
 }

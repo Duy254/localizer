@@ -19,11 +19,14 @@ struct Odom {
 class Fusion{
     Odom odom;
     ros::Publisher publisher;
+    bool allUpdated;
+    bool isUpdated[2] = {false, false};    
 public:
     explicit Fusion(ros::NodeHandle n);
     Odom getLocation();
     void NavCogCallback(const navcog_msg::SimplifiedOdometry::ConstPtr& msg);
     void IMUCallback(const geometry_msgs::Vector3Stamped::ConstPtr& msg);
+    bool isAllUpdated();
     void publish();
 };
 
