@@ -8,11 +8,11 @@ The main file, `src/localizer_node.cpp` is designed to contain as least code as 
 
 The class `Fusion` contains all the heavy lifting including `subscribe` and `publish`
 
-Currently this only get information from encoder.
+Currently this only get information from Navcog.
 
 ## What's subscribed and published
 
 - Subscribed
     - `/NavCog/pose`: The location info from NavCog
 - Published
-    - `/odometry`: a `nav_msgs/Odometry` message, containing fused pose info
+    - `/odometry`: a `navcog_msg/SimplifiedOdometry` message, containing fused pose info
