@@ -1,18 +1,12 @@
 # localizer
 
-This node acts as the main package for all the localization stuff of Cabot.
-
-## Code Structure
-
-The main file, `src/localizer_node.cpp` is designed to contain as least code as possible, so that the reader can see clearly what is going on.
-
-The class `Fusion` contains all the heavy lifting including `subscribe` and `publish`
-
-Currently this only get information from Navcog.
+This node acts as the entry point for all the localization stuff of Cabot. Currently it only calculates odometry.
 
 ## What's subscribed and published
 
 - Subscribed
-    - `/NavCog/pose`: The location info from NavCog
+    - `/encoder`: Encoder information from Arduino
+    - `/imu`: IMU information from Arduino
 - Published
-    - `/odometry`: a `navcog_msg/SimplifiedOdometry` message, containing fused pose info
+    - `/odom`: a `nav_msgs::Odometry` message, containing fused odometry
+    - `tf` transform from `/odom` to `base_link`
