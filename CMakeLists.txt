@@ -13,6 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
   arduino_msg
   navcog_msg
   roscpp
+        tf
 )
 
 ## System dependencies are found with CMake's conventions
@@ -107,7 +108,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
     INCLUDE_DIRS include
 #  LIBRARIES localizer
-    CATKIN_DEPENDS roscpp geometry_msgs nav_msgs arduino_msg navcog_msg
+        CATKIN_DEPENDS roscpp geometry_msgs nav_msgs arduino_msg navcog_msg tf
 #  DEPENDS system_lib
 )
 
