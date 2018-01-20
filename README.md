@@ -6,6 +6,12 @@ The source code includes odometry calculation. Particle filter localization is i
 
 ## Overall localization
 
+First, install dependencies:
+
+```
+sudo apt-get install ros-kinetic-navigation
+```
+
 Just connect Arduino and Lidar to your computer, then run
 ```
 roslaunch localizer localize.launch
