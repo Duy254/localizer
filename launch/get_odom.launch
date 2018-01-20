@@ -3,7 +3,7 @@
 
   <include file="$(find arduino_node)/launch/ros_serial.launch"/>
   <node pkg="localizer" type="localizer_node" name="localizer_node" output="screen"/>
-  <node name="rviz" pkg="rviz" type="rviz"
-          args="-d $(find localizer)/launch/odom.rviz"/>
+  <!-- <node name="rviz" pkg="rviz" type="rviz"
+          args="-d $(find localizer)/launch/odom.rviz"/> -->
 
 </launch>
