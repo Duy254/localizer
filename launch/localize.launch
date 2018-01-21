@@ -14,7 +14,7 @@
             odom_alpha5: 0.003
         </rosparam>
     </node>
-    <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="hector_trajectory_server" output="screen">
+    <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="hector_trajectory_server" output="screen" />
     <node name="rviz" pkg="rviz" type="rviz"
           args="-d $(find localizer)/launch/localize.rviz"/>
 </launch>
