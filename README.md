@@ -4,6 +4,14 @@ This node acts as the entry point for all the localization stuff of Cabot.
 
 The source code includes odometry calculation. Particle filter localization is included in the launch file
 
+## How to send goal and see Cabot run
+
+```
+roslaunch localizer move_base.launch
+roslaunch arduino_node teleop_serial.launch
+rosrun command_center commander
+```
+
 ## Overall localization
 
 First, install dependencies:
