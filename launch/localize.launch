@@ -12,6 +12,8 @@
             odom_alpha3: 0.010
             odom_alpha4: 0.005
             odom_alpha5: 0.003
+            initial_pose_x: 1
+            initial_pose_y: 0
         </rosparam>
     </node>
     <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="hector_trajectory_server" output="screen" />

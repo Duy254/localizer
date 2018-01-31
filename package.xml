@@ -55,8 +55,7 @@
   <depend>geometry_msgs</depend>
   <depend>nav_msgs</depend>
   <depend>arduino_msg</depend>
-  <depend>navcog_msg</depend>
-  <depend>move_base</depend>
+  <exec_depend>move_base</exec_depend>
   <exec_depend>arduino_node</exec_depend>
   <exec_depend>lidar_map</exec_depend>
   <exec_depend>robot_state_publisher</exec_depend>
