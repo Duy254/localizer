@@ -42,10 +42,13 @@ public:
     explicit Fusion(ros::NodeHandle n);
 
     void NavCogCallback(const navcog_msg::SimplifiedOdometry::ConstPtr &msg);
-
     void encoderCallback(const arduino_msg::Motor::ConstPtr &msg);
     void IMUCallback(const geometry_msgs::Vector3Stamped::ConstPtr& msg);
+
     bool isAllUpdated();
+
+    void forgetNavcog();
+
     void publish();
 };
 

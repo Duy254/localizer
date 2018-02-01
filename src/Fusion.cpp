@@ -115,6 +115,11 @@ bool Fusion::isAllUpdated() {
     return allUpdated;
 }
 
+void Fusion::forgetNavcog() {
+    this->isUpdated[2] = true;
+}
+
+
 static Point navcog2map(Point navcog_point) {
     navcog_point.first = -navcog_point.first - 9;
     navcog_point.second = -navcog_point.second;
