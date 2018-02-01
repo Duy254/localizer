@@ -1,7 +1,10 @@
 #include "Fusion.h"
 
+static Point navcog2map(Point navcog_point);
+
 Fusion::Fusion(ros::NodeHandle n) {
     this->odom_publisher = n.advertise<nav_msgs::Odometry>("odom", 50);
+    this->initial_pose_publisher = n.advertise<geometry_msgs::PoseWithCovarianceStamped>("initialpose", 5);
 }
 
 void Fusion::encoderCallback(const arduino_msg::Motor::ConstPtr &msg) {
@@ -19,6 +22,33 @@ void Fusion::IMUCallback(const geometry_msgs::Vector3Stamped::ConstPtr& msg){
     this->odom.theta = angles::from_degrees(msg->vector.x);
     this->odom.w = angles::shortest_angular_distance(prev_angle, this->odom.theta) * ENCODER_FREQ;
     this->isUpdated[1] = true;
+}
+
+void Fusion::NavCogCallback(const navcog_msg::SimplifiedOdometry::ConstPtr &msg) {
+    // In the future there will be more fancy sensor fusion code
+    Point navcog_point(msg->pose.x, msg->pose.y);
+    this->navcog_loc = navcog2map(navcog_point); // Only trust x and y data
+    if (!this->isUpdated[2]) { //The first time Navcog data arrives
+        // Set the internal odom data to Navcog data
+        this->odom.x = this->navcog_loc.first;
+        this->odom.y = this->navcog_loc.second;
+        // Publish initila pose for amcl
+        geometry_msgs::PoseWithCovarianceStamped initial_pose_msg;
+
+        initial_pose_msg.header.stamp = ros::Time::now();
+        initial_pose_msg.header.frame_id = "odom";
+
+        initial_pose_msg.pose.pose.position.x = this->odom.x;
+        initial_pose_msg.pose.pose.position.y = this->odom.y;
+        initial_pose_msg.pose.pose.position.z = 0;
+
+        geometry_msgs::Quaternion quat = tf::createQuaternionMsgFromYaw(this->odom.theta);
+        initial_pose_msg.pose.pose.orientation = quat;
+
+        this->initial_pose_publisher.publish(initial_pose_msg);
+
+    }
+    this->isUpdated[2] = true;
 }
 
 void Fusion::publish() {
@@ -70,4 +100,10 @@ bool Fusion::isAllUpdated() {
         }
     }
     return allUpdated;
+}
+
+static Point navcog2map(Point navcog_point) {
+    navcog_point.first = -navcog_point.first - 9;
+    navcog_point.second = -navcog_point.second;
+    return navcog_point;
 }
