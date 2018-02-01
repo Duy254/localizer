@@ -9,6 +9,7 @@
   <!--include file="$(find amcl)/examples/amcl_omni.launch" /-->
   <!--node pkg="amcl" type="amcl" name="amcl" output="screen"/-->
   <include file="$(find localizer)/launch/localize.launch"/>
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" /> 
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <rosparam file="$(find localizer)/2d_nav/costmap_common_params.yaml" command="load" ns="global_costmap" />
     <rosparam file="$(find localizer)/2d_nav/costmap_common_params.yaml" command="load" ns="local_costmap" />
