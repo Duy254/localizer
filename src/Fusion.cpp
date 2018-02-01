@@ -1,6 +1,9 @@
-#include "Fusion.h"
+#include "Fusion.h";
 
 static Point navcog2map(Point navcog_point);
+
+// Euclidian distance between the two localization system
+static double distance(Point navcog_loc, Odom odom);
 
 Fusion::Fusion(ros::NodeHandle n) {
     this->odom_publisher = n.advertise<nav_msgs::Odometry>("odom", 50);
@@ -28,6 +31,7 @@ void Fusion::NavCogCallback(const navcog_msg::SimplifiedOdometry::ConstPtr &msg)
     // In the future there will be more fancy sensor fusion code
     Point navcog_point(msg->pose.x, msg->pose.y);
     this->navcog_loc = navcog2map(navcog_point); // Only trust x and y data
+    // Update initial pose
     if (!this->isUpdated[2]) { //The first time Navcog data arrives
         // Set the internal odom data to Navcog data
         this->odom.x = this->navcog_loc.first;
@@ -48,6 +52,15 @@ void Fusion::NavCogCallback(const navcog_msg::SimplifiedOdometry::ConstPtr &msg)
         this->initial_pose_publisher.publish(initial_pose_msg);
 
     }
+    // Check whether the position Navcog gives is too far off from that from amcl
+    if (distance(this->navcog_loc, this->odom) > DRIFT_TOLERENCE) {
+        ROS_WARN_STREAM("Main localization system drift too much, switched to Navcog location.");
+        ROS_INFO_STREAM("Odom: { x: " << this->odom.x << ", y: " << this->odom.y << " }, Navcog: { x: "
+                                      << this->navcog_loc.first << ", y: " << this->navcog_loc.second << " }");
+        this->odom.x = this->navcog_loc.first;
+        this->odom.y = this->navcog_loc.second;
+    }
+
     this->isUpdated[2] = true;
 }
 
@@ -106,4 +119,8 @@ static Point navcog2map(Point navcog_point) {
     navcog_point.first = -navcog_point.first - 9;
     navcog_point.second = -navcog_point.second;
     return navcog_point;
+}
+
+static double distance(Point navcog_loc, Odom odom) {
+    return sqrt(pow(navcog_loc.first - odom.x, 2) + pow(navcog_loc.second - odom.y, 2));
 }

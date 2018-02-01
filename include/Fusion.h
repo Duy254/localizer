@@ -1,6 +1,9 @@
 #ifndef LOCALIZER_LOCATION_H
 #define LOCALIZER_LOCATION_H
 
+#define ENCODER_FREQ 10 // Actually defined in arduino_node, may need to combine these together in the future
+#define DRIFT_TOLERENCE 2 // The tolerence between Navcog location and amcl location
+
 #include "ros/ros.h"
 #include <angles/angles.h>
 #include <tf/transform_broadcaster.h>
@@ -11,9 +14,6 @@
 #include <nav_msgs/Odometry.h>
 
 #include <utility>
-
-// Actually defined in arduino_node, may need to combine these together in the future
-#define ENCODER_FREQ 10
 
 namespace cabot {
 
