@@ -7,11 +7,11 @@
 #include "ros/ros.h"
 #include <angles/angles.h>
 #include <tf/transform_broadcaster.h>
-#include <navcog_msg/SimplifiedOdometry.h>
-#include <arduino_msg/Motor.h>
 #include <geometry_msgs/Vector3Stamped.h>
 #include "geometry_msgs/PoseWithCovarianceStamped.h"
 #include <nav_msgs/Odometry.h>
+#include <navcog_msg/SimplifiedOdometry.h>
+#include <arduino_msg/Motor.h>
 
 #include <utility>
 

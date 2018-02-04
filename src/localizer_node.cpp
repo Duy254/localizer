@@ -1,7 +1,7 @@
 #include "ros/ros.h"
 #include "Fusion.h"
 
-#define LOOP_RATE 10
+#define LOOP_RATE 20
 
 int main(int argc, char **argv) {
 

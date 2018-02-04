@@ -6,8 +6,8 @@ static Point navcog2map(Point navcog_point);
 static double distance(Point navcog_loc, Odom odom);
 
 Fusion::Fusion(ros::NodeHandle n) {
-    this->odom_publisher = n.advertise<nav_msgs::Odometry>("odom", 50);
-    this->initial_pose_publisher = n.advertise<geometry_msgs::PoseWithCovarianceStamped>("initialpose", 5);
+    this->odom_publisher = n.advertise<nav_msgs::Odometry>("/odom", 50);
+    this->initial_pose_publisher = n.advertise<geometry_msgs::PoseWithCovarianceStamped>("/initialpose", 5);
 }
 
 void Fusion::encoderCallback(const arduino_msg::Motor::ConstPtr &msg) {

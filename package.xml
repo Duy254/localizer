@@ -54,6 +54,7 @@
   <depend>angles</depend>
   <depend>geometry_msgs</depend>
   <depend>nav_msgs</depend>
+  <depend>navcog_msg</depend>
   <depend>arduino_msg</depend>
   <exec_depend>move_base</exec_depend>
   <exec_depend>arduino_node</exec_depend>

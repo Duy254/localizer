@@ -10,6 +10,7 @@ add_compile_options(-std=c++11)
 find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   nav_msgs
+  navcog_msg
   arduino_msg
   roscpp
   tf
@@ -107,7 +108,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
     INCLUDE_DIRS include
 #  LIBRARIES localizer
-        CATKIN_DEPENDS roscpp geometry_msgs nav_msgs arduino_msg tf
+    CATKIN_DEPENDS roscpp geometry_msgs nav_msgs navcog_msg arduino_msg tf
 #  DEPENDS system_lib
 )
 

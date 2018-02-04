@@ -5,7 +5,7 @@
     <include file="$(find lidar_map)/launch/map_server.launch"/>
     <include file="$(find localizer)/launch/urdf_publisher.launch"/>
     <node pkg="amcl" type="amcl" name="amcl" output="screen">
-        <rosparam file="$(find localizer)/configs/amcl.yaml" command="load" />
+        <rosparam file="$(find localizer)/configs/amcl_params.yaml" command="load" />
     </node>
     <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="hector_trajectory_server" output="screen" />
     <node name="rviz" pkg="rviz" type="rviz"

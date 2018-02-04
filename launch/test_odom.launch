@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!-- http://wiki.ros.org/navigation/Tutorials/Navigation%20Tuning%20Guide -->
+<launch>
+
+  <include file="$(find localizer)/launch/get_odom.launch"/>
+  <include file="$(find lidar_map)/launch/urg_lidar.launch"/>
+  <include file="$(find localizer)/launch/urdf_publisher.launch"/>
+  <node name="rviz" pkg="rviz" type="rviz"
+        args="-d $(find localizer)/launch/test_odom.rviz"/>
+  <node name="rqt_reconfigure" pkg="rqt_reconfigure" type="rqt_reconfigure"/>
+
+</launch>

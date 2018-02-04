@@ -8,5 +8,6 @@
     <rosparam file="$(find localizer)/configs/local_costmap_params.yaml" command="load" />
     <rosparam file="$(find localizer)/configs/global_costmap_params.yaml" command="load" />
     <rosparam file="$(find localizer)/configs/base_local_planner_params.yaml" command="load" />
-  </node>
+    <rosparam file="$(find localizer)/configs/move_base_params.yaml" command="load" />
+</node>
 </launch>
