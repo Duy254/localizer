@@ -1,0 +1,10 @@
+odom_model_type: "diff-corrected"
+odom_alpha1: 0.005
+odom_alpha2: 0.005
+odom_alpha3: 0.010
+odom_alpha4: 0.005
+odom_alpha5: 0.003
+initial_pose_x: 1
+initial_pose_y: 0
+initial_cov_xx: 1
+initial_cov_yy: 1

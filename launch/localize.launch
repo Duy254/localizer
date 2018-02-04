@@ -5,18 +5,7 @@
     <include file="$(find lidar_map)/launch/map_server.launch"/>
     <include file="$(find localizer)/launch/urdf_publisher.launch"/>
     <node pkg="amcl" type="amcl" name="amcl" output="screen">
-        <rosparam>
-            odom_model_type: "diff-corrected"
-            odom_alpha1: 0.005
-            odom_alpha2: 0.005
-            odom_alpha3: 0.010
-            odom_alpha4: 0.005
-            odom_alpha5: 0.003
-            initial_pose_x: 1
-            initial_pose_y: 0
-            initial_cov_xx: 1
-            initial_cov_yy: 1
-        </rosparam>
+        <rosparam file="$(find localizer)/configs/amcl.yaml" command="load" />
     </node>
     <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="hector_trajectory_server" output="screen" />
     <node name="rviz" pkg="rviz" type="rviz"
