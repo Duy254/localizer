@@ -1,7 +1,7 @@
 obstacle_range: 2.5
 raytrace_range: 3.0
 #start from back left of robot, move counter-clockwise
-footprint: [[-0.1125, -0.2025], [0.1125, -0.2025], [0.1125, 0.2025], [-0.1125, 0.2025]]
+footprint: [[-0.2025, -0.1125], [-0.2025, 0.1125], [0.2025, 0.1125], [0.2025, -0.1125]]
 inflation_radius: 0.55
 # unknown_cost_value: 80
 
