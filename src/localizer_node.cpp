@@ -12,8 +12,10 @@ int main(int argc, char **argv) {
 
     bool useNavcog;
     n.getParam("useNavcog", useNavcog);
+    ROS_INFO_STREAM("Using Navcog: "<<useNavcog);
+    ros::Subscriber navcog_sub; // Can't move this into if statement
     if (useNavcog) {
-        ros::Subscriber navcog_sub = n.subscribe("Navcog/odometry", 1000, &Fusion::NavCogCallback, &pose);
+        navcog_sub = n.subscribe("/Navcog/odometry", 1000, &Fusion::NavCogCallback, &pose);
     } else {
         pose.forgetNavcog();
     }

@@ -28,7 +28,6 @@ void Fusion::IMUCallback(const geometry_msgs::Vector3Stamped::ConstPtr& msg){
 }
 
 void Fusion::NavCogCallback(const navcog_msg::SimplifiedOdometry::ConstPtr &msg) {
-    // In the future there will be more fancy sensor fusion code
     Point navcog_point(msg->pose.x, msg->pose.y);
     this->navcog_loc = navcog2map(navcog_point); // Only trust x and y data
     // Update initial pose
@@ -36,6 +35,7 @@ void Fusion::NavCogCallback(const navcog_msg::SimplifiedOdometry::ConstPtr &msg)
         // Set the internal odom data to Navcog data
         this->odom.x = this->navcog_loc.first;
         this->odom.y = this->navcog_loc.second;
+        ROS_INFO_STREAM("Received Navcog Data, initialize location to: ("<<this->odom.x<<", "<<this->odom.y<<")");
         // Publish initila pose for amcl
         geometry_msgs::PoseWithCovarianceStamped initial_pose_msg;
 

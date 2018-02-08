@@ -2,9 +2,10 @@
 <launch>
 
   <include file="$(find arduino_node)/launch/teleop_serial.launch"/>
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" /> 
   <node pkg="localizer" type="localizer_node" name="localizer_node" output="screen">
     <rosparam>
-      useNavcog: false
+      useNavcog: true
     </rosparam>
   </node>
   <!-- <node name="rviz" pkg="rviz" type="rviz"
