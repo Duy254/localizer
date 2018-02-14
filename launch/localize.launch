@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <launch>
-
-  <node pkg="localizer" type="localizer_node" name="localizer_node" />
-
-  <include file="$(find arduino_node)/launch/ros_serial.launch"/>
-
+    <include file="$(find localizer)/launch/get_odom.launch"/>
+    <include file="$(find lidar_map)/launch/urg_lidar.launch"/>
+    <include file="$(find lidar_map)/launch/map_server.launch"/>
+    <include file="$(find localizer)/launch/urdf_publisher.launch"/>
+    <node pkg="amcl" type="amcl" name="amcl" output="screen">
+        <rosparam file="$(find localizer)/configs/amcl_params.yaml" command="load" />
+    </node>
+    <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="hector_trajectory_server" output="screen" />
+    <node name="rviz" pkg="rviz" type="rviz"
+          args="-d $(find localizer)/launch/localize.rviz"/>
 </launch>

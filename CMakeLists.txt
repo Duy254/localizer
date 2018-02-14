@@ -9,7 +9,11 @@ add_compile_options(-std=c++11)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
+  nav_msgs
+  navcog_msg
+  arduino_msg
   roscpp
+  tf
 )
 
 ## System dependencies are found with CMake's conventions
@@ -104,7 +108,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
     INCLUDE_DIRS include
 #  LIBRARIES localizer
-    CATKIN_DEPENDS roscpp geometry_msgs
+    CATKIN_DEPENDS roscpp geometry_msgs nav_msgs navcog_msg arduino_msg tf
 #  DEPENDS system_lib
 )
 
