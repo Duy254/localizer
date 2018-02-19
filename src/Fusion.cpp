@@ -30,13 +30,18 @@ void Fusion::IMUCallback(const geometry_msgs::Vector3Stamped::ConstPtr& msg){
 void Fusion::NavCogCallback(const navcog_msg::SimplifiedOdometry::ConstPtr &msg) {
     Point navcog_point(msg->pose.x, msg->pose.y);
     this->navcog_loc = navcog2map(navcog_point); // Only trust x and y data
-    // Update initial pose
-    if (!this->isUpdated[2]) { //The first time Navcog data arrives
-        // Set the internal odom data to Navcog data
+    // Check whether the position Navcog gives is too far off from that from amcl
+    if (distance(this->navcog_loc, this->odom) > DRIFT_TOLERENCE) {
+        if (!this->isUpdated[2]){
+            ROS_INFO_STREAM("Received Navcog Data, initialize location to: ("<<this->navcog_loc.first<<", "<<this->navcog_loc.second<<")");
+        } else {
+        ROS_WARN_STREAM("Main localization system drift too much, switched to Navcog location.");
+        ROS_INFO_STREAM("Odom: { x: " << this->odom.x << ", y: " << this->odom.y << " }, Navcog: { x: "
+                                      << this->navcog_loc.first << ", y: " << this->navcog_loc.second << " }");
+        }
         this->odom.x = this->navcog_loc.first;
         this->odom.y = this->navcog_loc.second;
-        ROS_INFO_STREAM("Received Navcog Data, initialize location to: ("<<this->odom.x<<", "<<this->odom.y<<")");
-        // Publish initila pose for amcl
+        // Publish (re)initialize pose for amcl
         geometry_msgs::PoseWithCovarianceStamped initial_pose_msg;
 
         initial_pose_msg.header.stamp = ros::Time::now();
@@ -50,15 +55,6 @@ void Fusion::NavCogCallback(const navcog_msg::SimplifiedOdometry::ConstPtr &msg)
         initial_pose_msg.pose.pose.orientation = quat;
 
         this->initial_pose_publisher.publish(initial_pose_msg);
-
-    }
-    // Check whether the position Navcog gives is too far off from that from amcl
-    if (distance(this->navcog_loc, this->odom) > DRIFT_TOLERENCE) {
-        ROS_WARN_STREAM("Main localization system drift too much, switched to Navcog location.");
-        ROS_INFO_STREAM("Odom: { x: " << this->odom.x << ", y: " << this->odom.y << " }, Navcog: { x: "
-                                      << this->navcog_loc.first << ", y: " << this->navcog_loc.second << " }");
-        this->odom.x = this->navcog_loc.first;
-        this->odom.y = this->navcog_loc.second;
     }
 
     this->isUpdated[2] = true;

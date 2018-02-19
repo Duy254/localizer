@@ -7,7 +7,7 @@
     <rosparam file="$(find localizer)/configs/local_costmap_params.yaml" command="load" />
     <rosparam file="$(find localizer)/configs/global_costmap_params.yaml" command="load" />
     <rosparam file="$(find localizer)/configs/base_local_planner_params.yaml" command="load" />
-    <rosparam file="$(find localizer)/configs/dwa_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find localizer)/configs/base_global_planner_params.yaml" command="load" />
     <rosparam file="$(find localizer)/configs/move_base_params.yaml" command="load" />
   </node>
   <!-- <node name="rqt_reconfigure" pkg="rqt_reconfigure" type="rqt_reconfigure"/> -->
