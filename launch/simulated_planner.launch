@@ -1,0 +1,22 @@
+<launch>
+  <master auto="start"/>
+  <node pkg="localizer" type="fake_localizer_node" name="fake_localizer_node" output="screen" />
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" /> 
+  <include file="$(find lidar_map)/launch/map_server.launch"/>
+  <include file="$(find localizer)/launch/urdf_publisher.launch"/>
+  <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="hector_trajectory_server" />
+  <node name="rviz" pkg="rviz" type="rviz"
+          args="-d $(find localizer)/launch/localize.rviz"/>
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find localizer)/configs/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find localizer)/configs/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find localizer)/configs/simulated_local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find localizer)/configs/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find localizer)/configs/base_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find localizer)/configs/base_global_planner_params.yaml" command="load" />
+    <rosparam file="$(find localizer)/configs/move_base_params.yaml" command="load" />
+  </node>
+  <remap from="base_pose_ground_truth" to="odom"/>
+  <node pkg="fake_localization" type="fake_localization" name="fake_localization" />
+  <node name="rqt_reconfigure" pkg="rqt_reconfigure" type="rqt_reconfigure"/>
+</launch>

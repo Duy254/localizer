@@ -63,7 +63,6 @@ void Fusion::NavCogCallback(const navcog_msg::SimplifiedOdometry::ConstPtr &msg)
 void Fusion::commandCallback(const geometry_msgs::Twist::ConstPtr& msg) {
     this->odom.v = msg->linear.x;
     this->odom.w = msg->angular.z;
-    ROS_INFO_STREAM(this->odom.w);
 }
 
 void Fusion::spin() {
