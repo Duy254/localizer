@@ -8,3 +8,4 @@ initial_pose_x: 1
 initial_pose_y: 0
 initial_cov_xx: 1
 initial_cov_yy: 1
+max_particles: 2000

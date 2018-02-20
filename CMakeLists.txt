@@ -119,7 +119,6 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
   include
   ${catkin_INCLUDE_DIRS}
 )
@@ -155,7 +154,7 @@ target_link_libraries(${PROJECT_NAME}_node
 )
 
 target_link_libraries(fake_${PROJECT_NAME}_node
-        ${catkin_LIBRARIES}
+  ${catkin_LIBRARIES}
 )
 
 #############

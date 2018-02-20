@@ -3,9 +3,6 @@ raytrace_range: 3.0
 #start from back left of robot, move counter-clockwise, take into account human
 footprint: [[-0.2025, -0.4], [-0.2025, 0.1125], [0.2025, 0.1125], [0.2025, -0.4]]
 
-cost_scaling_factor: 6
-inflation_radius: 0.5
-
 # unknown_cost_value: 80
 
 observation_sources: laser_scan_sensor
