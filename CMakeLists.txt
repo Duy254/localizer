@@ -138,7 +138,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(${PROJECT_NAME}_node src/localizer_node.cpp src/Fusion.cpp include/Fusion.h)
-
+add_executable(fake_${PROJECT_NAME}_node src/Fusion.cpp include/Fusion.h src/simulation_node.cpp)
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -152,6 +152,10 @@ add_executable(${PROJECT_NAME}_node src/localizer_node.cpp src/Fusion.cpp includ
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_node
   ${catkin_LIBRARIES}
+)
+
+target_link_libraries(fake_${PROJECT_NAME}_node
+        ${catkin_LIBRARIES}
 )
 
 #############

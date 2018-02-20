@@ -3,12 +3,14 @@
 
 #define ENCODER_FREQ 20 // Actually defined in arduino_node, may need to combine these together in the future
 #define DRIFT_TOLERENCE 2 // The tolerence between Navcog location and amcl location
+#define SPIN_RATE 50
 
 #include "ros/ros.h"
 #include <angles/angles.h>
 #include <tf/transform_broadcaster.h>
 #include <geometry_msgs/Vector3Stamped.h>
-#include "geometry_msgs/PoseWithCovarianceStamped.h"
+#include <geometry_msgs/PoseWithCovarianceStamped.h>
+#include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
 #include <navcog_msg/SimplifiedOdometry.h>
 #include <arduino_msg/Motor.h>
@@ -31,7 +33,7 @@ namespace cabot {
 using namespace cabot;
 
 class Fusion{
-    Odom odom;
+    Odom odom = {0, 0, 0, 0, 0};
     Point navcog_loc;
     ros::Publisher odom_publisher;
     ros::Publisher initial_pose_publisher;
@@ -44,6 +46,10 @@ public:
     void NavCogCallback(const navcog_msg::SimplifiedOdometry::ConstPtr &msg);
     void encoderCallback(const arduino_msg::Motor::ConstPtr &msg);
     void IMUCallback(const geometry_msgs::Vector3Stamped::ConstPtr& msg);
+    
+    // For simulation
+    void commandCallback(const geometry_msgs::Twist::ConstPtr& msg);
+    void spin();
 
     bool isAllUpdated();
 

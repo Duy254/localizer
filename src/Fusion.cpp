@@ -1,4 +1,4 @@
-#include "Fusion.h";
+#include "Fusion.h"
 
 static Point navcog2map(Point navcog_point);
 
@@ -60,6 +60,19 @@ void Fusion::NavCogCallback(const navcog_msg::SimplifiedOdometry::ConstPtr &msg)
     this->isUpdated[2] = true;
 }
 
+void Fusion::commandCallback(const geometry_msgs::Twist::ConstPtr& msg) {
+    this->odom.v = msg->linear.x;
+    this->odom.w = msg->angular.z;
+    ROS_INFO_STREAM(this->odom.w);
+}
+
+void Fusion::spin() {
+    this->odom.theta += this->odom.w / SPIN_RATE;
+    auto distance = this->odom.v / SPIN_RATE;
+    this->odom.x += distance * cos(this->odom.theta);
+    this->odom.y += distance * sin(this->odom.theta);
+}
+
 void Fusion::publish() {
 
     auto current_time = ros::Time::now();
@@ -114,7 +127,6 @@ bool Fusion::isAllUpdated() {
 void Fusion::forgetNavcog() {
     this->isUpdated[2] = true;
 }
-
 
 static Point navcog2map(Point navcog_point) {
     navcog_point.first = -navcog_point.first - 9;
