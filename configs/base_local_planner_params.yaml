@@ -26,12 +26,14 @@ DWAPlannerROS:
   min_rot_vel: 0.1
 
   vx_samples: 20
-  vy_samples: 1
+  vth_samples: 40
+  vy_samples: 0
 
-  sim_time: 2
+  sim_time: 4
 
-  # path_distance_bias: 16
-  # occdist_scale: 0.02
+  path_distance_bias: 32
+  goal_distance_bias: 20
+  occdist_scale: 0.05
 
 TebLocalPlannerROS:
 
