@@ -3,7 +3,7 @@
 
 int main(int argc, char **argv) {
 
-    ros::init(argc, argv, "localizer");
+    ros::init(argc, argv, "fake_localizer");
     ros::NodeHandle n("~");
 
     Fusion pose(n);
