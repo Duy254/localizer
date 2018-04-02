@@ -4,13 +4,25 @@ This node acts as the entry point for all the localization stuff of Cabot.
 
 The source code includes odometry calculation. Particle filter localization is included in the launch file
 
+## How to see planner working in simulation
+
+```
+roslaunch localizer simulated_planner.launch
+```
+
+You can dynamically change all the parameters in the opened `rqt_reconfigre` window.
+
+The most important thing to tune is the local planner part. Feel free to play around using `rqt_reconfigure` and modify it in `base_local_planner_params.yaml`
+
+You can switch between `dwa_local_planner` and `teb_local_planner` or the default `base_local_planner` in `configs/move_base_params.yaml`.
+
 ## How to send goal and see Cabot run
 
 ```
 roslaunch localizer move_base.launch
-roslaunch arduino_node teleop_serial.launch
-rosrun command_center commander
 ```
+
+Then set goals in `rviz`
 
 ## Overall localization
 
@@ -24,7 +36,6 @@ Just connect Arduino and Lidar to your computer, then run
 ```
 roslaunch localizer localize.launch
 ```
-You can see all the things in `rviz`. The `rviz` configuration will be updated in the next commit.
 
 ### What's actually happening
 
