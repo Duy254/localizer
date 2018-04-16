@@ -1,6 +1,7 @@
 <launch>
   <master auto="start"/>
   <node pkg="localizer" type="fake_localizer_node" name="fake_localizer_node" output="screen" />
+  <include file="$(find hci_node)/launch/ped.launch"/>
   <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" /> 
   <include file="$(find lidar_map)/launch/map_server.launch"/>
   <include file="$(find localizer)/launch/urdf_publisher.launch"/>
