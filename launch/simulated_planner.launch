@@ -18,5 +18,6 @@
   </node>
   <remap from="base_pose_ground_truth" to="odom"/>
   <node pkg="fake_localization" type="fake_localization" name="fake_localization" />
+  <node pkg="robot_pose_publisher" type="robot_pose_publisher" name="robot_pose_publisher" />
   <node name="rqt_reconfigure" pkg="rqt_reconfigure" type="rqt_reconfigure"/>
 </launch>
