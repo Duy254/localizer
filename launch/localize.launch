@@ -9,6 +9,6 @@
     </node>
     <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="hector_trajectory_server" output="screen" />
     <node pkg="robot_pose_publisher" type="robot_pose_publisher" name="robot_pose_publisher" />
-    <node name="rviz" pkg="rviz" type="rviz"
-          args="-d $(find localizer)/launch/localize.rviz"/>
+    <!-- <node name="rviz" pkg="rviz" type="rviz"
+          args="-d $(find localizer)/launch/localize.rviz"/> -->
 </launch>
